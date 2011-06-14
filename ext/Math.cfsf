@@ -1,0 +1,23 @@
+<?php
+        require( "MathResources/emathk.inc" );
+        
+        // The Math Interface.
+        
+        final class Math {
+                public $ntrfc = array(  );
+                private $sniff, $kill = false;
+                
+                public function __dif ( $p ) {
+                        print "\t<< MathKernel \x49\x2d\x72\x31\x38\x2d\x31\x33\x38\x36\x2d\x36\x34\x0>>\r\n";
+                        print "\r\n";
+                        for ( $i = 0; $this->kill == false; ++$i ) {
+                                print "[$i]\t>> ";
+                                $x = trim( fgets( fopen( "php://stdin", "w" ), 4096 ) );
+                                if ( ord($x[0]) == 0x17 || ord($x[0]) == 0x11 || ord($x[0]) == 0x04 || ord($x[0]) == 0x07 || ord($x[0]) == 0x06) { $this->kill = true; continue; }
+                                print "\t\t>> = " . $this->ntrfc["emath"]->e($x) . "\r\n";
+                        }
+                }
+        }
+        $xMathLink = new Math(  );
+        $xMathLink->ntrfc[ "emath" ] = new _emathk(  );
+?>
