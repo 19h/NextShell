@@ -239,6 +239,7 @@
                         return $stack->pop(  );
                 }
                 public function trigger( $msg ) {
+                        return false;
                         $this->last_error = $msg;
                         if ( !$this->suppress_errors )
                                 trigger_error( $msg, E_USER_WARNING );

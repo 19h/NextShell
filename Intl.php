@@ -1,5 +1,5 @@
 <?php
-        error_reporting( E_ALL );
+        error_reporting( 0 );
         
         /* Copyright (c) Kenan Sulayman. All Rights reserved.
          * The NextShell implementation is based on the .Core-Kernel by Kenan Sulayman.
@@ -15,7 +15,7 @@
 		// Private vars.
                 private $v = "\x49\x2d\x72\x31\x38\x2d\x31\x33\x38\x36\x2d\x36\x34\x0";
                 private $g = array( "", "\x2d\x2d\x20\x57\x65\x6c\x63\x6f\x6d\x65\x20\x74\x6f\x20\x4e\x65\x78\x74\x53\x68\x65\x6c\x6c\x20%v%\x2d\x2d", "\x43\x6f\x70\x79\x72\x69\x67\x68\x74\x20\x28\x63\x29\x20\x4b\x65\x6e\x61\x6e\x20\x53\x75\x6c\x61\x79\x6d\x61\x6e\x2e\x20\x41\x75\x74\x68\x6f\x72\x69\x7a\x65\x64\x20\x75\x73\x65\x20\x6f\x6e\x6c\x79\x2e", "" );
-		private $initalized = false;
+		private $initialized = false;
                 
                 // Kernel Functions
                 public function __construct(  ) {
@@ -28,7 +28,7 @@
                 public function __init(  ) {
                         foreach ( $this->g as $p )
                                 print( strstr( $p, "%v%" ) ? str_replace( "%v%", $this->v, $p ) : $p ) . "\r\n";
-			if ( $this->__handle(array($x="Volumes_i"),$x) ) $this->initalized = true;
+			if ( $this->__handle(array($x="Volumes_i"),$x) ) $this->initialized = true;
                         while ( !!( 1 & true ) ) {
                                 print "$ " . getcwd(  ) . " >> ";
                                 $x = $this->__inpt();
@@ -140,6 +140,7 @@
 					print "Populating Volumes..\r\n";
 					if ( PHP_OS == "Darwin" ) {
 						$this->__populateVolumes ( false );
+						if ( !$this->initialized )  print "\r\n";
 						return true;
 					} else if ( PHP_OS == "WINNT" or PHP_OS == "WIN32" or PHP_OS == "WIN64" or PHP_OS == "WIN" ) {
 						// TODO :IMPLEMENT:
@@ -149,7 +150,6 @@
 							}
  						}
 					}
-					if ( !$this->initialized )  print "\r\n";
 					break;
 				case "mount":
 					////<!___!_!_!_!_!_!_!_!_!_!_!
