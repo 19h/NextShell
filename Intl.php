@@ -3,8 +3,6 @@
         
         /* Copyright (c) Kenan Sulayman. All Rights reserved.
          * The NextShell implementation is based on the .Core-Kernel by Kenan Sulayman.
-         *
-         * This is not meant to be reviewed without permission.
          */
         
         final class NextShell {
