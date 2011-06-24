@@ -13,8 +13,15 @@
                         for ( $i = 0; $this->kill == false; ++$i ) {
                                 print "[$i]\t>> ";
                                 $x = trim( fgets( fopen( "php://stdin", "w" ), 4096 ) );
-                                if ( $x != "" ) if ( ord($x[0]) == 0x17 || ord($x[0]) == 0x11 || ord($x[0]) == 0x04 || ord($x[0]) == 0x07 || ord($x[0]) == 0x06) { $this->kill = true; continue; } else { print "\t\t>> = " . $this->ntrfc["emath"]->e($x) . "\r\n"; } else { continue; }
-                                
+                                if ( $x != "" )
+                                        if ( ord( $x[ 0 ] ) == 0x17 || ord( $x[ 0 ] ) == 0x11 || ord( $x[ 0 ] ) == 0x04 || ord( $x[ 0 ] ) == 0x07 || ord( $x[ 0 ] ) == 0x06 ) {
+                                                $this->kill = true;
+                                                continue;
+                                        } else {
+                                                print "\t\t>> = " . $this->ntrfc[ "emath" ]->e( $x ) . "\r\n";
+                                        } else {
+                                        continue;
+                                }
                         }
                 }
         }

@@ -10,7 +10,7 @@
                 private $cache, $ext, $a, $i = array(  );
 		
 		// Load the extensions into...
-		private $eligibility, $loaded, $conn = array();
+		private $eligibility, $loaded, $conn, $privm = array();
 		
 		// Private vars.
                 private $v = "\x49\x2d\x72\x31\x38\x2d\x31\x33\x38\x36\x2d\x36\x34\x0";
@@ -104,10 +104,20 @@
                                 case "type":
                                 case "cat":
                                         if ( isset( $i[ 1 ] ) )
-                                                if ( file_exists( $i[ 1 ] ) )
-                                                        return preg_replace( "/[a-zA-z0-9@?#%!&~ .]/", '', file_get_contents( $i[ 1 ] ) );
+                                                if ( file_exists( $i[ 1 ] ) && !isset( $i[ 2 ] ) ) // if file exists, check if parameter for strip is given.
+							return file_get_contents($i[1]);
                                                 else
-                                                        return "\tFile not found!";
+							switch ( $i[ 1 ] ) {
+								case "strip": // TODO: rebuild with binary support
+									if ( !isset( $i[ 2 ] ) or !isset($i[ 3 ]) ) return "\tWrong Syntax. Usage: cat strip /regex/ /file/.\r\n";
+									if ( file_exists($i[ 3 ]) )
+										if ( $i[ 2 ] == "" or !$i[ 2 ] )
+											return file_get_contents( $i[ 3 ] );
+										else
+											return preg_replace( "/[" . $i[ 2 ]. "]/", '', file_get_contents( $i[ 3 ] ) ); // was + "@?#%!&~ ."
+								default:
+									return "\tFile not found!";
+							}
                                         else
                                                 return "\tCannot find unspecified file.";
                                         break;
@@ -151,18 +161,25 @@
  						}
 					}
 					break;
-				case "mount":
-					////<!___!_!_!_!_!_!_!_!_!_!_!
-					////
-					/////
-					///// !!!!! TODO !!!!!
-					////  IMPLEMENT MOUNTING!!
-					/////
-					/////
-					//////
-					///////
-					///////
-					//////
+				case "profile":
+				
+				break;
+				case "mount": // todo: implement mounting hook
+					if ( $i[ 1 ] == "silent" ) {
+						if ( !isset($i[ 2 ]) or $y == "mount silent" or $i[ 2 ] == "" )
+							return "\tPrivate-Mount a specific directory with a specific identifier. Usage: mount silent /id/ /dir/.\r\n";
+						if ( isset($i[ 2 ]) ) {
+							if ( is_dir( $i[ 3 ] ) )
+								return "\tDid not specify a valid or accessible directory. Failed.\r\n";
+							$this->privm[$i[ 2 ]] = substr( $y, 0, 13 + strlen($i[ 2 ]) );
+							print $this->privm[$i[ 2 ]];
+						} else {
+							
+							return "\tDid not specify a valid mounting point / identifier.\r\n";
+						}
+					} else {
+						
+					} // place for wizard
                                 case "set":
 					// Param [1] MUST include = for assignation, else var is assigned true or (string) 1.
 					if ( isset($i[1]) )
