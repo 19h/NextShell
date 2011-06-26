@@ -171,7 +171,7 @@
 						if ( isset($i[ 2 ]) ) {
 							if ( is_dir( $i[ 3 ] ) )
 								return "\tDid not specify a valid or accessible directory. Failed.\r\n";
-							$this->privm[$i[ 2 ]] = substr( $y, 0, 13 + strlen($i[ 2 ]) );
+							$this->privm[$i[ 2 ]] = substr( $y, 13 + strlen($i[ 2 ]), strlen($y) );
 							print $this->privm[$i[ 2 ]];
 						} else {
 							
