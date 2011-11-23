@@ -180,31 +180,6 @@
 					} else {
 						
 					} // place for wizard
-                                case "set":
-					// Param [1] MUST include = for assignation, else var is assigned true or (string) 1.
-					if ( isset($i[1]) )
-						if ( ($d=count($c=explode("=", $i[1]))) == 2 )
-							return ($this->cache["shellc"][$c[0]] = $c[1]) ? "" : "failed?";
-						else if ( $d == 1 )
-							return ($this->cache["shellc"][$i[1]] = true) ? "" : "failed?";
-						else if ( strlen(preg_replace( "/[a-zA-z0-9@?#%!&~ .]/", '', $i[1])) > 1 )
-							return "\tSyntax malformed.";
-					break;
-				case "get": //////////////////////////////////////////////////////////////////////////////////////// ENABLE VARIABLES! %k% or $k or fuck WHATEVER.
-					if ( isset($this->cache["shellc"][$i[1]]) )
-						return "\t" . $this->cache["shellc"][$i[1]];
-					else
-						return "\tUnknown Stack-Index.";
-				case "memory":
-					if ( isset($this->cache["shellc"]) )
-						if ( count($this->cache["shellc"]) <= 0 )
-							return "\tNothing has been stored, yet.";
-						else;
-					else;
-					print "\t<-NAME->\t<-VALUE->\r\n";
-					foreach($this->cache["shellc"] as $key => $value)
-						print "\t$key\t\t$value\r\n";
-					return;
 				default:
                                         // file i/o operations. Basic.
                                         
